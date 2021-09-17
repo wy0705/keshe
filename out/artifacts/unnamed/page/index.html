@@ -42,7 +42,7 @@
                     background-color="#545c64"
                     text-color="#fff"
                     active-text-color="#ffd04b">
-                <el-menu-item index="1">处理中心111</el-menu-item>
+                <el-menu-item index="1">班主任管理系统</el-menu-item>
                 <el-submenu index="2">
                     <template slot="title">我的工作台</template>
                     <el-menu-item index="2-1">选项1</el-menu-item>
@@ -56,7 +56,7 @@
                     </el-submenu>
                 </el-submenu>
                 <el-menu-item index="3" disabled>消息中心</el-menu-item>
-                <el-menu-item index="4"><a href="https://www.ele.me" target="_blank">订单管理</a></el-menu-item>
+                <el-menu-item index="4"><a href="class.html" target="_blank">班级查询</a></el-menu-item>
                 <!--                <el-dropdown>-->
                 <!--                    <i class="el-icon-setting" style="margin-right: 15px"></i>-->
                 <!--                    <el-dropdown-menu slot="dropdown">-->
@@ -88,18 +88,18 @@
                         <el-submenu index="1">
                             <template slot="title">
                                 <i class="el-icon-location"></i>
-                                <span>导航一</span>
+                                <span>班级</span>
                             </template>
                             <el-menu-item-group>
-                                <template slot="title">分组一</template>
-                                <el-menu-item index="1-1">选项1</el-menu-item>
-                                <el-menu-item index="1-2">选项2</el-menu-item>
+                                <template slot="title">一年级</template>
+                                <el-menu-item index="1-1">一班</el-menu-item>
+                                <el-menu-item index="1-2">二班</el-menu-item>
                             </el-menu-item-group>
-                            <el-menu-item-group title="分组2">
-                                <el-menu-item index="1-3">选项3</el-menu-item>
+                            <el-menu-item-group title="二年级">
+                                <el-menu-item index="1-3">一班</el-menu-item>
                             </el-menu-item-group>
                             <el-submenu index="1-4">
-                                <template slot="title">选项4</template>
+                                <template slot="title">二班</template>
                                 <el-menu-item index="1-4-1">选项1</el-menu-item>
                             </el-submenu>
                         </el-submenu>
@@ -122,6 +122,61 @@
     </el-container>
 
 </div>
+<center>
+
+
+
+
+    <s:form id="domainForm" action="chengji_ChengJilist.action" theme="simple">
+        学生学号: <s:textfield name="baseQuery.sid" placeholder=" 学生学号" />&nbsp;&nbsp;&nbsp;&nbsp;
+        课程名称: <s:select onchange='$("#domainForm").submit();'
+                        style="height:23px;" list="#allCnames" name="baseQuery.kid"
+                        listValue="kname" listKey="kid" headerKey="-1 "
+                        headerValue="------------请选择------------" />&nbsp;
+        <a href="javascript:;" onclick="go(1);"
+           style="position: relative; left: 3%">搜索
+        </a>&nbsp;&nbsp;
+        <br />
+        <br />
+        <table border="1" >
+            <tr style="background-color: PowderBlue;">
+                <th width="18%" ><span><strong>学生学号</strong></span></th>
+                <th width="18%" ><span><strong>学生姓名</strong></span></th>
+                <th width="18%" ><span><strong>学生班级</strong></span></th>
+                <th width="25%" ><span><strong>所选课程</strong></span></th>
+                <th width="10%" ><span><strong>课程成绩</strong></span></th>
+                <th colspan="2" width="5%"><span><strong>操作</strong></span></th>
+            </tr>
+            <s:iterator value="pageList.rows"><!--  var="t" -->
+                <tr style="background-color: white;">
+                    <td><s:property value="STable.sid"/>1</td>
+                    <td><s:property value="STable.sname"/>小明</td>
+                    <td><s:property value="STable.BTable.bname"/>一班</td>
+                    <td><s:property value="KTable.kname"/>语文</td>
+                    <td><!-- <s:property value='ccj'/> -->
+                        <input name="ccj" id="ccj" value="${ccj}" />
+                    </td>
+                    <td ><a onclick="update(this)"><button type="button">保存
+                    </button></a></td>
+                </tr>
+            </s:iterator>
+            <s:iterator value="pageList.rows"><!--  var="t" -->
+                <tr style="background-color: white;">
+                    <td><s:property value="STable.sid"/>2</td>
+                    <td><s:property value="STable.sname"/>李华</td>
+                    <td><s:property value="STable.BTable.bname"/>一班</td>
+                    <td><s:property value="KTable.kname"/>数学</td>
+                    <td><!-- <s:property value='ccj'/> -->
+                        <input name="ccj" id="ccj1" value="${ccj}" />
+                    </td>
+                    <td ><a onclick="update(this)"><button type="button">保存
+                    </button></a></td>
+                </tr>
+            </s:iterator>
+        </table>
+        <%@include file="/WEB-INF/Z-views/common/page.jsp"%>
+    </s:form>
+</center>
 </body>
 
 <!--<script src="../static/js/index.js"></script>-->
